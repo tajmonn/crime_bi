@@ -46,8 +46,12 @@ def get_pogoda_id(data: datetime):
                         float(row["windspeed"]),
                         float(row["sealevelpressure"]),
                         float(row["cloudcover"]),
-                        datetime.strptime(row["sunrise"], "%Y-%m-%dT%H:%M:%S"),
-                        datetime.strptime(row["sunset"], "%Y-%m-%dT%H:%M:%S"),
+                        datetime.strptime(row["sunrise"], "%Y-%m-%dT%H:%M:%S").strftime(
+                            "%H:%M"
+                        ),
+                        datetime.strptime(row["sunset"], "%Y-%m-%dT%H:%M:%S").strftime(
+                            "%H:%M"
+                        ),
                     ),
                 )
                 return cur.fetchone()[0]
@@ -205,17 +209,17 @@ with open(csv_file_path, mode="r", encoding="utf-8") as file:
                 przychod_id,
                 populacja_id,
             )
-
-        insert_crime(
-            get_sasiedztwo_id(row["community_area"]),
-            get_typ_id(row),
-            data.date(),
-            data.time(),
-            get_opis_id(row["iucr"]),
-            get_pogoda_id(data),
-            get_przychod_id(row["community_area"]),
-            get_populacja_id(data.year, row["community_area"]),
-        )
+        else:
+            insert_crime(
+                get_sasiedztwo_id(row["community_area"]),
+                get_typ_id(row),
+                data.date(),
+                data.time(),
+                get_opis_id(row["iucr"]),
+                get_pogoda_id(data),
+                get_przychod_id(row["community_area"]),
+                get_populacja_id(data.year, row["community_area"]),
+            )
 
     # Zatwierdzanie transakcji
     conn.commit()

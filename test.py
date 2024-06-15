@@ -10,8 +10,8 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 # Query the database
-cur.execute("""SELECT id FROM Przychod WHERE "Hardship index" = %s;""", (None,))
-print(cur.fetchone())
+# cur.execute("""SELECT id FROM Przychod WHERE "Hardship index" = %s;""", (None,))
+# print(cur.fetchone())
 # cur.execute("""SELECT * FROM Sasiedztwo""")
 # rows = cur.fetchall()
 # for row in rows:
@@ -20,3 +20,8 @@ print(cur.fetchone())
 # Close the cursor and connection
 cur.close()
 conn.close()
+
+a = datetime.strptime("2012-01-01", "%Y-%m-%d").date()  # .strftime("%d/%m/%Y")
+b = datetime.strptime("1/1/2012 9:00", "%d/%m/%Y %H:%M").date()  # .strftime("%d/%m/%Y")
+print(a, b)
+print("yay" if a == b else "nay")

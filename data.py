@@ -16,7 +16,6 @@ csv_file_path = "raw/crime.tsv"
 
 # some extra file for going through all of them would be nice
 
-start_record = 10_000
 no_records = 1452551  # 10_000
 
 
@@ -37,15 +36,12 @@ def exeptions(data):
 
 with open(csv_file_path, mode="r", encoding="utf-8") as file:
     reader = csv.DictReader(file, delimiter="\t")
-
-    # for _ in range(start_record):
-    #    next(reader)
     percent = 0
-    # for row in islice(reader, no_records):
     for row in reader:
         percent += 1
         if percent % 100 == 0:
             print(round(percent / no_records * 100), "%")
+            conn.commit()
         data = datetime.strptime(row["date"], "%m/%d/%Y %H:%M")
         if exeptions(data):
             continue

@@ -14,7 +14,7 @@ cur = conn.cursor()
 cur.execute(
     """
     CREATE TABLE IF NOT EXISTS Populacja (
-        id SERIAL PRIMARY KEY,
+        id_populacja SERIAL PRIMARY KEY,
         "Population - Age 0-17" INT,
         "Population - Age 18-29" INT,
         "Population - Age 30-39" INT,
@@ -41,7 +41,7 @@ cur.execute(
 cur.execute(
     """
     CREATE TABLE IF NOT EXISTS Przychod (
-        id SERIAL PRIMARY KEY,
+        id_przychod SERIAL PRIMARY KEY,
         "Percent of housing crowded" FLOAT,
         "Hardship index" INT,
         "Per capita income" INT,
@@ -59,15 +59,15 @@ cur.execute(
 cur.execute(
     """
     CREATE TABLE IF NOT EXISTS Pogoda (
-        id SERIAL PRIMARY KEY,
+        id_pogoda SERIAL PRIMARY KEY,
         precip FLOAT,
         precipcover FLOAT,
         temp FLOAT,
         windspeed FLOAT,
         sealevelpressure FLOAT,
         cloudcover FLOAT,
-        sunrise TIMESTAMP,
-        sunset TIMESTAMP
+        sunrise TIME,
+        sunset TIME
     )
 """
 )
@@ -78,7 +78,7 @@ cur.execute(
 cur.execute(
     """
     CREATE TABLE IF NOT EXISTS Opis (
-        id SERIAL PRIMARY KEY,
+        id_opis SERIAL PRIMARY KEY,
         "primary description" TEXT,
         "secondary description" TEXT
     )
@@ -91,7 +91,7 @@ cur.execute(
 cur.execute(
     """
     CREATE TABLE IF NOT EXISTS Typ (
-        id SERIAL PRIMARY KEY,
+        id_typ SERIAL PRIMARY KEY,
         arrest BOOL,
         domestic BOOL
     )
@@ -104,7 +104,7 @@ cur.execute(
 cur.execute(
     """
     CREATE TABLE IF NOT EXISTS Sasiedztwo (
-        id SERIAL PRIMARY KEY,
+        id_sasiedztwo SERIAL PRIMARY KEY,
         name TEXT,
         side TEXT
     )
@@ -154,14 +154,14 @@ cur.execute(
         id_pogoda INT,
         id_przychod INT,
         id_populacja INT,
-        FOREIGN KEY (id_sasiedztwo) REFERENCES Sasiedztwo(id),
-        FOREIGN KEY (id_populacja) REFERENCES Populacja(id),
-        FOREIGN KEY (id_typ) REFERENCES Typ(id),
+        FOREIGN KEY (id_sasiedztwo) REFERENCES Sasiedztwo(id_sasiedztwo),
+        FOREIGN KEY (id_populacja) REFERENCES Populacja(id_populacja),
+        FOREIGN KEY (id_typ) REFERENCES Typ(id_typ),
         FOREIGN KEY (data) REFERENCES Data(date),
         FOREIGN KEY (time) REFERENCES Czas(time),
-        FOREIGN KEY (id_opis) REFERENCES Opis(id),
-        FOREIGN KEY (id_pogoda) REFERENCES Pogoda(id),
-        FOREIGN KEY (id_przychod) REFERENCES Przychod(id)
+        FOREIGN KEY (id_opis) REFERENCES Opis(id_opis),
+        FOREIGN KEY (id_pogoda) REFERENCES Pogoda(id_pogoda),
+        FOREIGN KEY (id_przychod) REFERENCES Przychod(id_przychod)
     )
 """
 )

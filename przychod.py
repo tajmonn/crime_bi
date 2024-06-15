@@ -14,7 +14,7 @@ csv_file_path = "raw/Per_Capita_Income.tsv"
 
 
 def repeat(row):
-    cur.execute("SELECT * FROM Populacja")
+    cur.execute("SELECT * FROM Przychod")
     rows = cur.fetchall()
     for a in rows:
         if a[1:] == (

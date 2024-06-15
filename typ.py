@@ -23,7 +23,12 @@ for bool1 in bools:
             (bool1, bool2),
         )
 
-
+"""
+1 True True
+2 True False
+3 False True
+4 False False
+"""
 # Zatwierdzanie transakcji
 conn.commit()
 
