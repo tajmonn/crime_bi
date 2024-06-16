@@ -44,9 +44,7 @@ def main() -> None:
         """Determine if the row should be skipped based on certain conditions."""
         return is_chicago(row) or is_row_repeated(row)
 
-    def insert_row(row: dict) -> None:
-        """Insert the row into the database."""
-        insert_query = """
+    insert_query = """
         INSERT INTO Przychod (
             "Percent of housing crowded",
             "Hardship index",
@@ -57,6 +55,9 @@ def main() -> None:
             "Percent households below poverty"
         ) VALUES (%s, %s, %s, %s, %s, %s, %s)
         """
+
+    def insert_row(row: dict) -> None:
+        """Insert the row into the database."""
         cur.execute(insert_query, extract_row_data(row))
 
     # Read the TSV file and insert rows into the database
@@ -70,6 +71,10 @@ def main() -> None:
     # Commit the transaction
     conn.commit()
 
+    # Dummy record
+    cur.execute(insert_query, (None, None, None, None, None, None, None))
+
+    conn.commit()
     # Close the cursor and connection
     cur.close()
     conn.close()

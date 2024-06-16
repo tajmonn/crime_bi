@@ -59,8 +59,12 @@ def main() -> None:
                     float(row["windspeed"]),
                     float(row["sealevelpressure"]),
                     float(row["cloudcover"]),
-                    datetime.strptime(row["sunrise"], "%Y-%m-%dT%H:%M:%S"),
-                    datetime.strptime(row["sunset"], "%Y-%m-%dT%H:%M:%S"),
+                    datetime.strptime(row["sunrise"], "%Y-%m-%dT%H:%M:%S").strftime(
+                        "%H:%M"
+                    ),
+                    datetime.strptime(row["sunset"], "%Y-%m-%dT%H:%M:%S").strftime(
+                        "%H:%M"
+                    ),
                 ),
             )
         # Zatwierdzanie transakcji

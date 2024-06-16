@@ -9,14 +9,14 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 cur.execute("""DROP TABLE IF EXISTS Przestepstwo;""")
-cur.execute("""DROP TABLE IF EXISTS Populacja;""")
-cur.execute("""DROP TABLE IF EXISTS Przychod;""")
+# cur.execute("""DROP TABLE IF EXISTS Populacja;""")
+# cur.execute("""DROP TABLE IF EXISTS Przychod;""")
 cur.execute("""DROP TABLE IF EXISTS Pogoda;""")
-cur.execute("""DROP TABLE IF EXISTS Opis;""")
-cur.execute("""DROP TABLE IF EXISTS Typ;""")
-cur.execute("""DROP TABLE IF EXISTS Sasiedztwo;""")
-cur.execute("""DROP TABLE IF EXISTS Data;""")
-cur.execute("""DROP TABLE IF EXISTS Czas;""")
+# cur.execute("""DROP TABLE IF EXISTS Opis;""")
+# cur.execute("""DROP TABLE IF EXISTS Typ;""")
+# cur.execute("""DROP TABLE IF EXISTS Sasiedztwo;""")
+# cur.execute("""DROP TABLE IF EXISTS Data;""")
+# cur.execute("""DROP TABLE IF EXISTS Czas;""")
 
 # POPULACJA
 cur.execute(

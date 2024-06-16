@@ -27,7 +27,7 @@ def main() -> None:
         arrest = row["arrest"] == "TRUE"
         domestic = row["domestic"] == "TRUE"
         cur.execute(
-            """SELECT id FROM Typ WHERE arrest = %s AND domestic = %s""",
+            """SELECT id_typ FROM Typ WHERE arrest = %s AND domestic = %s""",
             (arrest, domestic),
         )
         return cur.fetchone()[0]
@@ -39,7 +39,7 @@ def main() -> None:
             for row in reader:
                 if row["datetime"].startswith(date_str):
                     cur.execute(
-                        """SELECT id FROM Pogoda WHERE precip = %s AND precipcover = %s AND temp = %s AND windspeed = %s AND sealevelpressure = %s AND cloudcover = %s AND sunrise = %s AND sunset = %s""",
+                        """SELECT id_pogoda FROM Pogoda WHERE precip = %s AND precipcover = %s AND temp = %s AND windspeed = %s AND sealevelpressure = %s AND cloudcover = %s AND sunrise = %s AND sunset = %s;""",
                         (
                             float(row["precip"]),
                             float(row["precipcover"]),
@@ -63,7 +63,7 @@ def main() -> None:
             for row in reader:
                 if community_area == row["area_number"]:
                     cur.execute(
-                        """SELECT id FROM Sasiedztwo WHERE name = %s AND side = %s;""",
+                        """SELECT id_sasiedztwo FROM Sasiedztwo WHERE name = %s AND side = %s;""",
                         (row["community_area_name"], row["side"]),
                     )
                     return cur.fetchone()[0]
@@ -74,7 +74,7 @@ def main() -> None:
             for row in reader:
                 if iucr == row["iucr"]:
                     cur.execute(
-                        """SELECT id FROM Opis WHERE "primary description" = %s AND "secondary description" = %s;""",
+                        """SELECT id_opis FROM Opis WHERE "primary description" = %s AND "secondary description" = %s;""",
                         (row["primary_description"], row["secondary_description"]),
                     )
                     return cur.fetchone()[0]
@@ -85,7 +85,7 @@ def main() -> None:
             for row in reader:
                 if community_area == row["Community Area Number"]:
                     cur.execute(
-                        """SELECT id FROM Przychod WHERE "Percent of housing crowded" = %s AND "Hardship index" = %s AND "Per capita income" = %s AND "Percent aged 16+ unemployed" = %s AND "Percent aged 25+ without highschool diploma" = %s AND "Percent aged under 18 or over 64" = %s AND "Percent households below poverty" = %s;""",
+                        """SELECT id_przychod FROM Przychod WHERE "Percent of housing crowded" = %s AND "Hardship index" = %s AND "Per capita income" = %s AND "Percent aged 16+ unemployed" = %s AND "Percent aged 25+ without highschool diploma" = %s AND "Percent aged under 18 or over 64" = %s AND "Percent households below poverty" = %s;""",
                         (
                             float(row["PERCENT OF HOUSING CROWDED"]),
                             int(row["HARDSHIP INDEX"]),
@@ -104,7 +104,7 @@ def main() -> None:
             for row in reader:
                 if row["Year"] == str(year) and row["Geography"] == str(community_area):
                     cur.execute(
-                        """SELECT id FROM Populacja WHERE
+                        """SELECT id_populacja FROM Populacja WHERE
                                     "Population - Age 0-17" = %s AND
                                     "Population - Age 18-29" = %s AND
                                     "Population - Age 30-39" = %s AND
@@ -143,11 +143,15 @@ def main() -> None:
                     return cur.fetchone()[0]
 
     def get_dummy_ids() -> tuple[int, int, int]:
-        cur.execute("""SELECT id FROM Sasiedztwo WHERE name IS NULL;""")
+        cur.execute("""SELECT id_sasiedztwo FROM Sasiedztwo WHERE name IS NULL;""")
         sasiedztwo_id = cur.fetchone()[0]
-        cur.execute("""SELECT id FROM Przychod WHERE "Hardship index" IS NULL;""")
+        cur.execute(
+            """SELECT id_przychod FROM Przychod WHERE "Hardship index" IS NULL;"""
+        )
         przychod_id = cur.fetchone()[0]
-        cur.execute("""SELECT id FROM Populacja WHERE "Population - Male" IS NULL;""")
+        cur.execute(
+            """SELECT id_populacja FROM Populacja WHERE "Population - Male" IS NULL;"""
+        )
         populacja_id = cur.fetchone()[0]
         return sasiedztwo_id, przychod_id, populacja_id
 

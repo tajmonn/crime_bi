@@ -65,9 +65,7 @@ def main() -> None:
             int(row.get("Population - White Non-Latinx", 0)),
         ]
 
-    def insert_data_into_db(values: list) -> None:
-        """Insert data into the database."""
-        insert_query = """
+    insert_query = """
         INSERT INTO Populacja (
             "Population - Age 0-17",
             "Population - Age 18-29",
@@ -87,6 +85,9 @@ def main() -> None:
             "Population - White Non-Latinx"
         ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
         """
+
+    def insert_data_into_db(values: list) -> None:
+        """Insert data into the database."""
         cur.execute(insert_query, values)
 
     def aggregate_population_data(reader: csv.DictReader, translator: dict) -> dict:
@@ -164,6 +165,28 @@ def main() -> None:
 
     write_aggregated_data_to_csv(agg_data, output_csv_path)
 
+    cur.execute(
+        insert_query,
+        (
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+        ),
+    )
+    conn.commit()
     # Close the cursor and connection
     cur.close()
     conn.close()
