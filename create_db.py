@@ -8,7 +8,15 @@ conn = psycopg2.connect(
 # Create a cursor object
 cur = conn.cursor()
 
-# cur.execute("""DROP TABLE IF EXISTS Populacja;""")
+cur.execute("""DROP TABLE IF EXISTS Przestepstwo;""")
+cur.execute("""DROP TABLE IF EXISTS Populacja;""")
+cur.execute("""DROP TABLE IF EXISTS Przychod;""")
+cur.execute("""DROP TABLE IF EXISTS Pogoda;""")
+cur.execute("""DROP TABLE IF EXISTS Opis;""")
+cur.execute("""DROP TABLE IF EXISTS Typ;""")
+cur.execute("""DROP TABLE IF EXISTS Sasiedztwo;""")
+cur.execute("""DROP TABLE IF EXISTS Data;""")
+cur.execute("""DROP TABLE IF EXISTS Czas;""")
 
 # POPULACJA
 cur.execute(
@@ -35,7 +43,6 @@ cur.execute(
 """
 )
 
-# cur.execute("""DROP TABLE IF EXISTS Przychod;""")
 
 # Przychod
 cur.execute(
@@ -53,7 +60,6 @@ cur.execute(
 """
 )
 
-# cur.execute("""DROP TABLE IF EXISTS Pogoda;""")
 
 # Pogoda
 cur.execute(
@@ -72,7 +78,6 @@ cur.execute(
 """
 )
 
-# cur.execute("""DROP TABLE IF EXISTS Opis;""")
 
 # Opis
 cur.execute(
@@ -85,7 +90,6 @@ cur.execute(
 """
 )
 
-# cur.execute("""DROP TABLE IF EXISTS Typ;""")
 
 # Typ
 cur.execute(
@@ -98,7 +102,6 @@ cur.execute(
 """
 )
 
-# cur.execute("""DROP TABLE IF EXISTS Sasiedztwo;""")
 
 # Sasiedztwo
 cur.execute(
@@ -111,7 +114,6 @@ cur.execute(
 """
 )
 
-# cur.execute("""DROP TABLE IF EXISTS Data;""")
 
 # Data
 cur.execute(
@@ -127,7 +129,6 @@ cur.execute(
 """
 )
 
-# cur.execute("""DROP TABLE IF EXISTS Czas;""")
 
 # Czas
 cur.execute(
@@ -140,7 +141,6 @@ cur.execute(
         )"""
 )
 
-# cur.execute("""DROP TABLE IF EXISTS Przestepstwo;""")
 
 # Przestepstwo
 cur.execute(
